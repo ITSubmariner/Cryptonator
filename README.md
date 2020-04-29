@@ -60,13 +60,13 @@ Response:
 ]
 ```
 ## Модель данных
-Нет необходимости в использовании всех полей ответа, поэтому основная модель данных _(tickets)_ примет следующий вид:
+Нет необходимости в использовании всех полей ответа, поэтому основная модель данных _(tickets)_ примет следующий вид (период/интервал "свечек" можно представить в виде перечисления|enum):
 ```
 id: long (primary key)
-marketId: long (foreign key)
 startsAt: LocalDateTime
 open: float
 close: float
+period: enum
 volume: float
 ```
 Таблица криптовалютных пар _(markets)_ будет выглядеть следующим образом:
@@ -79,11 +79,6 @@ status: boolean
 ```
 ticketId: long (foreign key)
 marketId: long (foreign key)
-```
-Период (или интервал) "свечек" можно представить в виде перечисления (enum). Тогда таблица _(ticketIntervals)_ будет выглядеть следующим образом:
-```
-ticketId: long (foreign key)
-interval: String
 ```
 ## Описание User Interface
 UI можно разделить на две части: форма ввода и результаты.
