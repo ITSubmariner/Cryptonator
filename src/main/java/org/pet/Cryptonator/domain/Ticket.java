@@ -20,7 +20,16 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private Period period;
     private LocalDateTime startsAt;
-    private float open;
-    private float close;
-    private float volume;
+    private double open;
+    private double close;
+    private double volume;
+
+    public Ticket(Market market, Period period, LocalDateTime startsAt, double open, double close, double volume) {
+        this.market = market;
+        this.period = period;
+        this.startsAt = startsAt;
+        this.open = open;
+        this.close = close;
+        this.volume = volume;
+    }
 }

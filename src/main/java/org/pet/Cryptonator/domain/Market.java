@@ -15,4 +15,9 @@ public class Market {
     private long id;
     private String name;
     private boolean status;
+
+    public Market(String name, boolean status) {
+        this.name = name;
+        this.status = status;
+    }
 }
