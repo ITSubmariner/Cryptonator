@@ -19,9 +19,9 @@ module.exports = {
             }
         ]
     },
-    plugins: [
+    /*plugins: [
         new webpack.HotModuleReplacementPlugin()
-    ],
+    ],*/
     resolve: {
         modules: [
             path.join(__dirname, 'src', 'main', 'resources', 'js'),

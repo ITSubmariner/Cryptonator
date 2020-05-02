@@ -11,7 +11,8 @@ module.exports = merge(common, {
         allowedHosts: [
             'localhost:8080'
         ],
-        stats: 'errors-only',
-        clientLogLevel: 'error'
+        disableHostCheck: true
+        // stats: 'errors-only',
+        // clientLogLevel: 'error'
     }
 });
