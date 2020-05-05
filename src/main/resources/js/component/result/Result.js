@@ -1,7 +1,6 @@
 import React, { Component } from "react"
-import { hot } from "react-hot-loader"
 
-class ResultForm extends Component{
+class Result extends Component{
     render() {
         return (
             <div>Result form</div>
@@ -9,4 +8,4 @@ class ResultForm extends Component{
     }
 }
 
-export default ResultForm
+export default Result

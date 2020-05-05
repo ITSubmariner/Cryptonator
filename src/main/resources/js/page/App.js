@@ -1,17 +1,21 @@
-import React, { Component} from "react";
+import React, {Component} from "react";
+import Input from "../component/input/Input"
+import Result from "../component/result/Result"
+import rootReducer from "../store/reducer"
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
-import Input from "../component/InputForm"
-import Result from "../component/ResultForm"
+const store = createStore(rootReducer)
 
-class App extends Component{
+export default class App extends Component{
     render(){
         return(
-            <div className="App">
-                <Input />
-                <Result />
-            </div>
+            <Provider store={store}>
+                <div className="App">
+                    <Input />
+                    <Result />
+                </div>
+            </Provider>
         );
     }
 }
-
-export default App
