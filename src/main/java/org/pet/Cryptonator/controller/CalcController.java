@@ -1,5 +1,7 @@
 package org.pet.Cryptonator.controller;
 
+import org.pet.Cryptonator.domain.Period;
+import org.pet.Cryptonator.domain.Result;
 import org.pet.Cryptonator.service.CalcService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +18,12 @@ public class CalcController {
     }
 
     @GetMapping
-    public String calculate(
+    public Result calculate(
+            @RequestParam("market") String market,
+            @RequestParam("period") String period,
             @RequestParam("firstPeriod") int firstPeriod,
             @RequestParam("secondPeriod") int secondPeriod,
-            @RequestParam("percent") int percent) {
-        calcService.calculate(firstPeriod, secondPeriod, percent);
-        return null;
+            @RequestParam("percent") double percent) {
+        return calcService.calculate(market, Period.valueOf(period), firstPeriod, secondPeriod, percent);
     }
 }

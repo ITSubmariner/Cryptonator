@@ -6,15 +6,14 @@ import {
 } from "./action"
 
 const initialState = {
-    market: 0,
-    period: 0,
-    firstPeriod: 0,
-    secondPeriod: 0,
-    percent: 0
+    market: "LTC-BTC",
+    period: "MINUTE_1",
+    firstPeriod: undefined,
+    secondPeriod: undefined,
+    percent: undefined
 }
 
 export const inputReducer = (state = initialState, action) => {
-    console.log(state)
     switch (action.type) {
         case INPUT_CHANGE_MARKET:
             return {

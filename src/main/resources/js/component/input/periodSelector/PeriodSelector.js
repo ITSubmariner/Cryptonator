@@ -12,10 +12,10 @@ class PeriodSelector extends React.Component{
     render() {
         return (
             <select value={this.props.period} onChange={this.onPeriodChange}>
-                <option value="0">1 минута</option>
-                <option value="1">5 минут</option>
-                <option value="2">1 час</option>
-                <option value="3">1 сутки</option>
+                <option value="MINUTE_1">1 минута</option>
+                <option value="MINUTE_5">5 минут</option>
+                <option value="HOUR_1">1 час</option>
+                <option value="DAY_1">1 сутки</option>
             </select>
         )
     }

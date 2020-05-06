@@ -61,11 +61,11 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
             return ticketRepository.findAllByMarket_NameAndPeriodOrderByStartsAtAsc(marketName, period);
         } else {
             //get and return tickets from bittrex api
-            return getTicketsFromDb(marketName, period);
+            return getTicketsFromApi(marketName, period);
         }
     }
 
-    private List<Ticket> getTicketsFromDb(String marketName, Period period) {
+    private List<Ticket> getTicketsFromApi(String marketName, Period period) {
         String ticketUrl = "https://api.bittrex.com/v3/markets/" + marketName + "/candles/" + period.name() + "/recent";
         //get tickets from bittrex api as JsonNodes
         RestTemplate restTemplate = new RestTemplate();
@@ -87,6 +87,7 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
                 );
                 tickets.add(ticket);
             }
+            this.ticketRepository.saveAll(tickets);
             return tickets;
         } else {
             throw new GetTicketsException();

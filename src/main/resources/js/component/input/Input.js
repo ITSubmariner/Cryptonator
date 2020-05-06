@@ -7,25 +7,26 @@ import StrategySettings from "./strategySettings/StrategySettings"
 import { setResult } from "../../store/result/action"
 
 class Input extends React.Component{
+    constructor(props) {
+        super(props)
+
+        this.calculate = this.calculate.bind(this);
+    }
+    
     render() {
         return (
             <div>
                 <MarketSelector />
                 <PeriodSelector />
                 <StrategySettings />
-                <button>Вычислить</button>
+                <button onClick={this.calculate}>Вычислить</button>
             </div>
         )
     }
 
     calculate() {
-        let params = {
-            firstPeriod: this.props.firstPeriod,
-            secondPeriod: this.props.secondPeriod,
-            percent: this.props.percent
-        }
-        axios.get("/calculate", {params: params}).then(
-            response => {},
+        axios.get("/calculate", {params: this.props.input}).then(
+            response => this.props.setResult(response.data),
             error => {}
         )
     }
@@ -33,7 +34,7 @@ class Input extends React.Component{
 
 const mapStateToProps = state => {
     return {
-
+        input: state.input
     }
 }
 

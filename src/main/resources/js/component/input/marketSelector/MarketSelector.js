@@ -21,7 +21,7 @@ class MarketSelector extends React.Component{
         this.onMarketChange = this.onMarketChange.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getMarkets()
     }
 
@@ -44,7 +44,7 @@ class MarketSelector extends React.Component{
 
     renderMarket(market) {
         return (
-            <option value={market.id} className={market.status ? "statusOnline" : "statusOffline"} key={market.id}>
+            <option value={market.name} className={market.status ? "statusOnline" : "statusOffline"} key={market.id}>
                 {market.name}
             </option>
         )

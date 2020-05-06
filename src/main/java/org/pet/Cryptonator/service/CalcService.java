@@ -1,5 +1,8 @@
 package org.pet.Cryptonator.service;
 
+import org.pet.Cryptonator.domain.Period;
+import org.pet.Cryptonator.domain.Result;
+
 public interface CalcService {
-    void calculate(int firstPeriod, int secondPeriod, int percent);
+    Result calculate(String market, Period period, int smallPeriod, int bigPeriod, double percent);
 }
