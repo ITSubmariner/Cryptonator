@@ -3,6 +3,7 @@ import axios from "axios"
 import { connect } from "react-redux"
 import { setMarket } from "Js/store/input/action"
 import "Css/input.css"
+import {marketSelector} from "../../../store/input/selector";
 
 const statusOffline = {
     color: "red"
@@ -61,7 +62,7 @@ class MarketSelector extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        market: state.input.market
+        market: marketSelector(state)
     }
 }
 

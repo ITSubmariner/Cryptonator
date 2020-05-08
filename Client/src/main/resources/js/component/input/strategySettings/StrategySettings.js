@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setPercent, setFirstPeriod, setSecondPeriod } from "Js/store/input/action"
+import {firstPeriodSelector, percentSelector, secondPeriodSelector} from "../../../store/input/selector";
 
 class StrategySettings extends React.Component{
     constructor(props) {
@@ -41,9 +42,9 @@ class StrategySettings extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        firstPeriod: state.input.firstPeriod,
-        secondPeriod: state.input.secondPeriod,
-        percent: state.input.percent
+        firstPeriod: firstPeriodSelector(state),
+        secondPeriod: secondPeriodSelector(state),
+        percent: percentSelector(state)
     }
 }
 

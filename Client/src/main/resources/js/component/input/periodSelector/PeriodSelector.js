@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setPeriod } from "Js/store/input/action"
+import {periodSelector} from "../../../store/input/selector";
 
 class PeriodSelector extends React.Component{
     constructor(props) {
@@ -31,7 +32,7 @@ class PeriodSelector extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        period: state.input.period
+        period: periodSelector(state)
     }
 }
 

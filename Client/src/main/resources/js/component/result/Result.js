@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import "Css/result.css"
+import {resultSelector} from "../../store/selector";
 
 class Result extends React.Component {
     constructor(props) {
@@ -81,7 +82,7 @@ class Result extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        result: state.result
+        result: resultSelector(state)
     }
 }
 

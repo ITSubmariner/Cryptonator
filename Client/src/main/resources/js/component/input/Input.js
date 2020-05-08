@@ -6,6 +6,7 @@ import PeriodSelector from "./periodSelector/PeriodSelector"
 import StrategySettings from "./strategySettings/StrategySettings"
 import { setResult } from "Js/store/result/action"
 import "Css/input.css"
+import {inputSelector} from "../../store/selector";
 
 class Input extends React.Component{
     constructor(props) {
@@ -35,7 +36,7 @@ class Input extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        input: state.input
+        input: inputSelector(state)
     }
 }
 
