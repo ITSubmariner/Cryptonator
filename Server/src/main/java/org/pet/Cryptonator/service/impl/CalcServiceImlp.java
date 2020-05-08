@@ -43,11 +43,11 @@ public class CalcServiceImlp implements CalcService {
                 boolean smallEmaCrossBigEma = smallEma.get(i - 1) < bigEma.get(i - 1) && smallEma.get(i) >= bigEma.get(i);
                 if (smallEmaCrossBigEma && smallEmaIncreasingOrConstant) {
                     dealInProgress = true;
-                    priceForSell = tickets.get(i).getClose() * (1 + i / 100d);
+                    priceForSell = tickets.get(i).getClose() * (1 + percent / 100d);
                     result.startDeal(tickets.get(i).getStartsAt(), tickets.get(i).getClose());
                 }
             } else {
-                boolean sellResponsibility = priceForSell >= tickets.get(i).getClose();
+                boolean sellResponsibility = priceForSell <= tickets.get(i).getClose();
                 if (sellResponsibility) {
                     dealInProgress = false;
                     priceForSell = 0;
