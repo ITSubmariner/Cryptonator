@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        main: path.join(__dirname, 'src', 'js', 'main.js'),
+        main: path.join(__dirname, 'src', 'main', 'resources', 'js', 'main.js'),
     },
     module: {
         rules: [
@@ -23,11 +23,11 @@ module.exports = {
     ],*/
     resolve: {
         alias: {
-            Css: path.resolve(__dirname, 'src', 'css'),
-            Js: path.resolve(__dirname, 'src', 'js')
+            Css: path.resolve(__dirname, 'src', 'main', 'resources', 'css'),
+            Js: path.resolve(__dirname, 'src', 'main', 'resources', 'js')
         },
         modules: [
-            path.join(__dirname, 'src', 'js'),
+            path.join(__dirname, 'src', 'main', 'resources', 'js'),
             path.join(__dirname, 'node_modules'),
         ],
     }

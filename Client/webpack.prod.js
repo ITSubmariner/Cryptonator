@@ -9,7 +9,7 @@ module.exports = merge(common, {
         new CleanWebpackPlugin()
     ],
     output: {
-        path: path.join(__dirname, "src", "static", "js"),
+        path: path.join(__dirname, "src", 'main', 'resources', "static", "js"),
         filename: "[name].js"
     }
 });
