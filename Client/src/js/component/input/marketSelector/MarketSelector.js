@@ -1,7 +1,8 @@
 import React from "react"
 import axios from "axios"
 import { connect } from "react-redux"
-import { setMarket } from "../../../store/input/action"
+import { setMarket } from "Js/store/input/action"
+import "Css/input.css"
 
 const statusOffline = {
     color: "red"
@@ -27,11 +28,13 @@ class MarketSelector extends React.Component{
 
     render() {
         return (
-            <select value={this.props.market} onChange={this.onMarketChange}>
-                {
-                    this.state.markets.map(market => this.renderMarket(market))
-                }
-            </select>
+            <div>
+                <span>Валютная пара</span>
+                <br/>
+                <select value={this.props.market} onChange={this.onMarketChange}>
+                    { this.state.markets.map(market => this.renderMarket(market)) }
+                </select>
+            </div>
         )
     }
 

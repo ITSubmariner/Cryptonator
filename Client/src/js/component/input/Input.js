@@ -4,7 +4,8 @@ import { connect } from "react-redux"
 import MarketSelector from "./marketSelector/MarketSelector"
 import PeriodSelector from "./periodSelector/PeriodSelector"
 import StrategySettings from "./strategySettings/StrategySettings"
-import { setResult } from "../../store/result/action"
+import { setResult } from "Js/store/result/action"
+import "Css/input.css"
 
 class Input extends React.Component{
     constructor(props) {
@@ -15,7 +16,7 @@ class Input extends React.Component{
     
     render() {
         return (
-            <div>
+            <div className="input-form">
                 <MarketSelector />
                 <PeriodSelector />
                 <StrategySettings />

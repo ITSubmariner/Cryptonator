@@ -23,6 +23,10 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],*/
     resolve: {
+        alias: {
+            Css: path.resolve(__dirname, 'src', 'css'),
+            Js: path.resolve(__dirname, 'src', 'js')
+        },
         modules: [
             path.join(__dirname, 'src', 'js'),
             path.join(__dirname, 'node_modules'),

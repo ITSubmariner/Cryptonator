@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { setPeriod } from "../../../store/input/action"
+import { setPeriod } from "Js/store/input/action"
 
 class PeriodSelector extends React.Component{
     constructor(props) {
@@ -11,12 +11,16 @@ class PeriodSelector extends React.Component{
 
     render() {
         return (
-            <select value={this.props.period} onChange={this.onPeriodChange}>
-                <option value="MINUTE_1">1 минута</option>
-                <option value="MINUTE_5">5 минут</option>
-                <option value="HOUR_1">1 час</option>
-                <option value="DAY_1">1 сутки</option>
-            </select>
+            <div>
+                <span>Периодичность тикетов</span>
+                <br/>
+                <select value={this.props.period} onChange={this.onPeriodChange}>
+                    <option value="MINUTE_1">1 минута</option>
+                    <option value="MINUTE_5">5 минут</option>
+                    <option value="HOUR_1">1 час</option>
+                    <option value="DAY_1">1 сутки</option>
+                </select>
+            </div>
         )
     }
 

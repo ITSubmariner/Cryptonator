@@ -1,0 +1,40 @@
+.result {
+    display: inline-block;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 50px;
+    margin-bottom: 15px;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+td, th {
+    padding: 5px 10px;
+}
+
+tfoot tr td {
+    text-align: center;
+    font-style: italic;
+    padding: 10px 0;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+.time {
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+.date {
+    font-size: small;
+}
+
+.statistics{
+    padding-left: 10px;
+    margin-bottom: 10px;
+}

@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { setPercent, setFirstPeriod, setSecondPeriod } from "../../../store/input/action"
+import { setPercent, setFirstPeriod, setSecondPeriod } from "Js/store/input/action"
 
 class StrategySettings extends React.Component{
     constructor(props) {
@@ -14,8 +14,13 @@ class StrategySettings extends React.Component{
     render() {
         return (
             <div>
-                <input type="number" placeholder="Период первой скользящей" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} />
-                <input type="number" placeholder="Период второй скользящей" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} />
+                <span>Период первой скользящей</span><br/>
+                <input type="number" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} />
+                <br/>
+                <span>Период второй скользящей</span><br/>
+                <input type="number" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} />
+                <br/>
+                <span>Выигрыш со сделки, %</span><br/>
                 <input type="number" placeholder="Выигрыш со сделки" value={this.props.percent} onChange={this.onPercentChange} />
             </div>
         )

@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import Input from "../component/input/Input"
 import Result from "../component/result/Result"
 import rootReducer from "../store/reducer"
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { createStore } from "redux"
+import { Provider } from "react-redux"
+import "Css/app.css"
 
 const store = createStore(rootReducer)
 
