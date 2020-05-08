@@ -8,9 +8,9 @@ import {
 const initialState = {
     market: "LTC-BTC",
     period: "MINUTE_1",
-    firstPeriod: undefined,
-    secondPeriod: undefined,
-    percent: undefined
+    firstPeriod: 0,
+    secondPeriod: 0,
+    percent: 0
 }
 
 export const inputReducer = (state = initialState, action) => {

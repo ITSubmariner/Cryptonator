@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
     entry: {
-        main: path.join(__dirname, 'src', 'main', 'resources', 'js', 'main.js'),
+        main: path.join(__dirname, 'src', 'js', 'main.js'),
     },
     module: {
         rules: [
@@ -24,7 +24,7 @@ module.exports = {
     ],*/
     resolve: {
         modules: [
-            path.join(__dirname, 'src', 'main', 'resources', 'js'),
+            path.join(__dirname, 'src', 'js'),
             path.join(__dirname, 'node_modules'),
         ],
     }
