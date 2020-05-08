@@ -57,7 +57,10 @@ class Result extends React.Component {
     }
 
     getFormattedDate(date) {
-        let pDate = new Date(date)
+        if (date == null) {
+            return (<span>—</span>)
+        }
+        let pDate = new Date(date);
         return (
             <span>
                 <span className="time">{ pDate.toLocaleTimeString().substring(0, 5) }</span><span className="date">{ pDate.toLocaleDateString() }</span>
