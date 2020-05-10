@@ -5,8 +5,9 @@ import MarketSelector from "./marketSelector/MarketSelector"
 import PeriodSelector from "./periodSelector/PeriodSelector"
 import StrategySettings from "./strategySettings/StrategySettings"
 import { setResult } from "Js/store/result/action"
-import "Css/input.css"
-import {inputSelector} from "../../store/selector";
+import {inputSelector} from "../../store/selector"
+import { Box, Paper, Grid, Button } from "@material-ui/core"
+import { PlayCircleFilled } from "@material-ui/icons";
 
 class Input extends React.Component{
     constructor(props) {
@@ -17,12 +18,18 @@ class Input extends React.Component{
     
     render() {
         return (
-            <div className="input-form">
-                <MarketSelector />
-                <PeriodSelector />
-                <StrategySettings />
-                <button onClick={this.calculate}>Вычислить</button>
-            </div>
+            <Grid>
+                <Box m={1} px={3} py={2} border={1} borderColor="grey.500" borderRadius="5%" minWidth="250px" component={Paper}>
+                    <MarketSelector />
+                    <PeriodSelector />
+                    <StrategySettings />
+                    <Grid container justify="center">
+                        <Box mt={2}>
+                            <Button size="small" variant="contained" color="primary" onClick={this.calculate} startIcon={<PlayCircleFilled />}>Запуск</Button>
+                        </Box>
+                    </Grid>
+                </Box>
+            </Grid>
         )
     }
 

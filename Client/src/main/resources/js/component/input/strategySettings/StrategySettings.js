@@ -1,7 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setPercent, setFirstPeriod, setSecondPeriod } from "Js/store/input/action"
-import {firstPeriodSelector, percentSelector, secondPeriodSelector} from "../../../store/input/selector";
+import {firstPeriodSelector, percentSelector, secondPeriodSelector} from "Js/store/input/selector"
+import { TextField, Grid, Box } from "@material-ui/core"
+
 
 class StrategySettings extends React.Component{
     constructor(props) {
@@ -14,16 +16,17 @@ class StrategySettings extends React.Component{
 
     render() {
         return (
-            <div>
-                <span>Период первой скользящей</span><br/>
-                <input type="number" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} />
-                <br/>
-                <span>Период второй скользящей</span><br/>
-                <input type="number" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} />
-                <br/>
-                <span>Выигрыш со сделки, %</span><br/>
-                <input type="number" placeholder="Выигрыш со сделки" value={this.props.percent} onChange={this.onPercentChange} />
-            </div>
+            <Grid container direction="column">
+                <Box mt={1}>
+                    <TextField required inputProps={{min: 0}} margin="dense" fullWidth variant="outlined" type="number" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} label="Период первой скользящей" />
+                </Box>
+                <Box>
+                    <TextField required inputProps={{min: 0}} margin="dense" fullWidth variant="outlined" type="number" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} label="Период второй скользящей" />
+                </Box>
+                <Box>
+                    <TextField required inputProps={{min: 0}} margin="dense" fullWidth variant="outlined" type="number" value={this.props.percent} onChange={this.onPercentChange} label="Выигрыш со сделки, %" />
+                </Box>
+            </Grid>
         )
     }
 

@@ -4,7 +4,7 @@ import Result from "../component/result/Result"
 import rootReducer from "../store/reducer"
 import { createStore } from "redux"
 import { Provider } from "react-redux"
-import "Css/app.css"
+import { Container, CssBaseline, Grid } from "@material-ui/core"
 
 const store = createStore(rootReducer)
 
@@ -12,10 +12,12 @@ export default class App extends Component{
     render(){
         return(
             <Provider store={store}>
-                <div className="App">
-                    <Input />
-                    <Result />
-                </div>
+                <Container>
+                    <Grid container>
+                        <Input />
+                        <Result />
+                    </Grid>
+                </Container>
             </Provider>
         );
     }

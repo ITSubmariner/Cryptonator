@@ -2,16 +2,9 @@ import React from "react"
 import axios from "axios"
 import { connect } from "react-redux"
 import { setMarket } from "Js/store/input/action"
-import "Css/input.css"
-import {marketSelector} from "../../../store/input/selector";
-
-const statusOffline = {
-    color: "red"
-}
-
-const statusOnline = {
-    color: "green"
-}
+import {marketSelector} from "../../../store/input/selector"
+import { Box, Select, InputLabel, FormControl, MenuItem } from "@material-ui/core"
+import { MonetizationOn } from "@material-ui/icons"
 
 class MarketSelector extends React.Component{
     constructor(props) {
@@ -29,13 +22,12 @@ class MarketSelector extends React.Component{
 
     render() {
         return (
-            <div>
-                <span>Валютная пара</span>
-                <br/>
-                <select value={this.props.market} onChange={this.onMarketChange}>
+            <FormControl fullWidth>
+                <InputLabel id="market-selector-label">Валютная пара</InputLabel>
+                <Select value={this.props.market} onChange={this.onMarketChange} labelId="market-selector-label">
                     { this.state.markets.map(market => this.renderMarket(market)) }
-                </select>
-            </div>
+                </Select>
+            </FormControl>
         )
     }
 
@@ -48,9 +40,9 @@ class MarketSelector extends React.Component{
 
     renderMarket(market) {
         return (
-            <option value={market.name} className={market.status ? "statusOnline" : "statusOffline"} key={market.id}>
+            <MenuItem value={market.name} key={market.id}>
                 {market.name}
-            </option>
+            </MenuItem>
         )
     }
 
