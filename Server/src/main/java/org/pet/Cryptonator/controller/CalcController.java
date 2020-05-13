@@ -19,11 +19,11 @@ public class CalcController {
 
     @GetMapping
     public Result calculate(
-            @RequestParam("market") String market,
+            @RequestParam("market") long marketId,
             @RequestParam("period") String period,
             @RequestParam("firstPeriod") int firstPeriod,
             @RequestParam("secondPeriod") int secondPeriod,
             @RequestParam("percent") double percent) {
-        return calcService.calculate(market, Period.valueOf(period), firstPeriod, secondPeriod, percent);
+        return calcService.calculate(marketId, Period.valueOf(period), firstPeriod, secondPeriod, percent);
     }
 }
