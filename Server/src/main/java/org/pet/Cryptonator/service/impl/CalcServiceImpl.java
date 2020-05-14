@@ -2,7 +2,7 @@ package org.pet.Cryptonator.service.impl;
 
 import org.pet.Cryptonator.domain.Period;
 import org.pet.Cryptonator.domain.Result;
-import org.pet.Cryptonator.domain.Ticket;
+import org.pet.Cryptonator.domain.dto.TicketDto;
 import org.pet.Cryptonator.service.BittrexObtainService;
 import org.pet.Cryptonator.service.CalcService;
 import org.springframework.stereotype.Service;
@@ -19,9 +19,9 @@ public class CalcServiceImpl implements CalcService {
     }
 
     @Override
-    public Result calculate(String market, Period period, int smallPeriod, int bigPeriod, double percent) {
+    public Result calculate(long marketId, Period period, int smallPeriod, int bigPeriod, double percent) {
         Result result = new Result();
-        List<Ticket> tickets = this.bittrexObtainService.getTickets(market, period);
+        List<TicketDto> tickets = this.bittrexObtainService.getTickets(marketId, period);
 //        set start date
         result.setStartDate(tickets.get(0).getStartsAt());
 //        set end date
@@ -59,7 +59,7 @@ public class CalcServiceImpl implements CalcService {
         return result;
     }
 
-    private List<Double> getEma(List<Ticket> tickets, int period) {
+    private List<Double> getEma(List<TicketDto> tickets, int period) {
 //        calculate alfa
         double alfa = (double) 2 / (period + 1);
         List<Double> ema = new ArrayList<>();

@@ -1,9 +1,11 @@
 package org.pet.Cryptonator.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.pet.Cryptonator.domain.Market;
 import org.pet.Cryptonator.domain.Period;
-import org.pet.Cryptonator.domain.Ticket;
+import org.pet.Cryptonator.domain.dto.MarketDto;
+import org.pet.Cryptonator.domain.dto.TicketDto;
+import org.pet.Cryptonator.domain.entity.MarketEntity;
+import org.pet.Cryptonator.domain.entity.TicketEntity;
 import org.pet.Cryptonator.exception.GetMarketsException;
 import org.pet.Cryptonator.exception.GetTicketsException;
 import org.pet.Cryptonator.repository.MarketRepository;
@@ -32,21 +34,25 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
 
     @PostConstruct
     private void getMarkets() {
+//        check if there are markets in ignite
+        if (this.marketRepository.notEmpty()) {
+            return;
+        }
         //get all markets as JsonNodes
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<JsonNode[]> response = restTemplate.getForEntity(marketUrl, JsonNode[].class);
         //check response code
         if (response.getStatusCodeValue() == 200 && response.getBody() != null) {
             //deserialize bittrex json to Market list
-            List<Market> markets = new ArrayList<>();
+            List<MarketEntity> markets = new ArrayList<>();
             for (JsonNode node : response.getBody()) {
-                Market market = new Market(
+                MarketEntity market = new MarketEntity(
                         node.get("symbol").asText(),
                         node.get("status").asText().equals("ONLINE")
                 );
                 markets.add(market);
             }
-            //write market list to db
+            //write market list to ignite
             marketRepository.saveAll(markets);
         } else {
             throw new GetMarketsException();
@@ -54,31 +60,30 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
     }
 
     @Override
-    public List<Ticket> getTickets(String marketName, Period period) {
-        //check if this {pair, period} tickets exists in db
-        if (ticketRepository.existsTicketsByMarket_NameAndPeriod(marketName, period)) {
-            //return tickets from db
-            return ticketRepository.findAllByMarket_NameAndPeriodOrderByStartsAtAsc(marketName, period);
+    public List<TicketDto> getTickets(long marketId, Period period) {
+        //check if this {pair, period} tickets exists in ignite
+        if (ticketRepository.ticketExistence(marketId, period)) {
+            //return tickets from ignite
+            return ticketRepository.get(marketId, period);
         } else {
             //get and return tickets from bittrex api
-            return getTicketsFromApi(marketName, period);
+            return getTicketsFromApi(marketId, period);
         }
     }
 
-    private List<Ticket> getTicketsFromApi(String marketName, Period period) {
-        String ticketUrl = "https://api.bittrex.com/v3/markets/" + marketName + "/candles/" + period.name() + "/recent";
+    private List<TicketDto> getTicketsFromApi(long marketId, Period period) {
+        MarketDto marketDto = marketRepository.get(marketId);
+        String ticketUrl = "https://api.bittrex.com/v3/markets/" + marketDto.getName() + "/candles/" + period.name() + "/recent";
         //get tickets from bittrex api as JsonNodes
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<JsonNode[]> response = restTemplate.getForEntity(ticketUrl, JsonNode[].class);
         //check response code
         if (response.getStatusCodeValue() == 200 && response.getBody() != null) {
-            //get market from db
-            Market market = marketRepository.findByName(marketName);
             //deserialize bittrex json to Ticket list
-            List<Ticket> tickets = new ArrayList<>();
+            List<TicketEntity> tickets = new ArrayList<>();
             for (JsonNode node : response.getBody()) {
-                Ticket ticket = new Ticket(
-                        market,
+                TicketEntity ticket = new TicketEntity(
+                        marketId,
                         period,
                         LocalDateTime.parse(node.get("startsAt").asText(), DateTimeFormatter.ISO_DATE_TIME),
                         node.get("open").asDouble(),
@@ -87,8 +92,7 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
                 );
                 tickets.add(ticket);
             }
-            this.ticketRepository.saveAll(tickets);
-            return tickets;
+            return this.ticketRepository.saveAll(tickets);
         } else {
             throw new GetTicketsException();
         }

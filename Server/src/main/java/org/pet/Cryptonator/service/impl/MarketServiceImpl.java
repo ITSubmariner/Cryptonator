@@ -1,6 +1,7 @@
 package org.pet.Cryptonator.service.impl;
 
-import org.pet.Cryptonator.domain.Market;
+import org.pet.Cryptonator.domain.converter.MarketConverter;
+import org.pet.Cryptonator.domain.dto.MarketDto;
 import org.pet.Cryptonator.exception.GetFrontMarketsException;
 import org.pet.Cryptonator.repository.MarketRepository;
 import org.pet.Cryptonator.service.MarketService;
@@ -12,12 +13,12 @@ import java.util.List;
 public class MarketServiceImpl implements MarketService {
     private final MarketRepository marketRepository;
 
-    public MarketServiceImpl(MarketRepository marketRepository) {
+    public MarketServiceImpl(MarketRepository marketRepository, MarketConverter marketConverter) {
         this.marketRepository = marketRepository;
     }
 
     @Override
-    public List<Market> getAll() {
+    public List<MarketDto> getAll() {
         try {
             return marketRepository.findAll();
         } catch (Exception e) {

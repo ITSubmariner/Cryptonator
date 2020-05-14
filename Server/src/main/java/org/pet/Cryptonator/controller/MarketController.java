@@ -1,6 +1,6 @@
 package org.pet.Cryptonator.controller;
 
-import org.pet.Cryptonator.domain.Market;
+import org.pet.Cryptonator.domain.dto.MarketDto;
 import org.pet.Cryptonator.service.MarketService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ public class MarketController {
     }
 
     @GetMapping
-    public List<Market> getMarkets() {
+    public List<MarketDto> getMarkets() {
         return marketService.getAll();
     }
 

@@ -30,7 +30,7 @@ class MarketSelector extends React.Component{
 
     renderMarket(market) {
         return (
-            <option value={market.name} className={market.status ? "statusOnline" : "statusOffline"} key={market.id}>
+            <option value={market.id} className={market.status ? "statusOnline" : "statusOffline"} key={market.id}>
                 {market.name}
             </option>
         )

@@ -6,7 +6,7 @@ import {
 } from "./action"
 
 const initialState = {
-    market: "LTC-BTC",
+    market: 0,
     period: "MINUTE_1",
     firstPeriod: 0,
     secondPeriod: 0,
