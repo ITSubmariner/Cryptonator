@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.cache.Cache;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class MarketRepository {
             MarketDto marketDto = marketConverter.entityToDto(entry.getKey(), entry.getValue());
             result.add(marketDto);
         }
+        result.sort(Comparator.comparing(MarketDto::getId));
         return result;
     }
 
