@@ -14,15 +14,18 @@ class StrategySettings extends React.Component{
     }
 
     onFirstPeriodChange(event) {
-        this.props.setFirstPeriod(event.target.value)
+        let firstPeriod = Number(event.target.value)
+        this.props.setFirstPeriod(firstPeriod)
     }
 
     onSecondPeriodChange(event) {
-        this.props.setSecondPeriod(event.target.value)
+        let secondPeriod = Number(event.target.value)
+        this.props.setSecondPeriod(secondPeriod)
     }
 
     onPercentChange(event) {
-        this.props.setPercent(event.target.value)
+        let percent = Number(event.target.value)
+        this.props.setPercent(percent)
     }
 
     render() {

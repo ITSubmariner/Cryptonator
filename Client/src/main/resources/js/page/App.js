@@ -17,6 +17,6 @@ export default class App extends React.Component {
                     <Result />
                 </div>
             </Provider>
-        );
+        )
     }
 }

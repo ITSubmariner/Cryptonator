@@ -37,7 +37,8 @@ class MarketSelector extends React.Component{
     }
 
     onMarketChange(event) {
-        this.props.setMarket(event.target.value)
+        let marketId = Number(event.target.value)
+        this.props.setMarket(marketId)
     }
 
     render() {
@@ -55,7 +56,7 @@ class MarketSelector extends React.Component{
 }
 
 MarketSelector.propTypes = {
-    market: PropTypes.string,
+    market: PropTypes.number,
     markets: PropTypes.array,
     setMarket: PropTypes.func
 }
