@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
+import { resultSelector } from "Js/store/selector";
 import "Css/result.css"
-import {resultSelector} from "../../store/selector";
 
 class Result extends React.Component {
     constructor(props) {
@@ -9,39 +9,6 @@ class Result extends React.Component {
 
         this.getTableFooter = this.getTableFooter.bind(this);
         this.getStatistics = this.getStatistics.bind(this);
-    }
-
-    render() {
-        return (
-            <div className="result">
-                { this.getStatistics() }
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Время покупки</th>
-                        <th>Время продажи</th>
-                        <th>Стоимость при покупке</th>
-                        <th>Завершённость</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.props.result.deals.map((deal, n) => {
-                            return (
-                                <tr key={n}>
-                                    <td>{ this.getFormattedDate(deal.start) }</td>
-                                    <td>{ this.getFormattedDate(deal.end) }</td>
-                                    <td>{deal.buyPrice}</td>
-                                    <td>{deal.completed ? '+' : '-'}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                    </tbody>
-                    { this.getTableFooter() }
-                </table>
-            </div>
-        )
     }
 
     getTableFooter() {
@@ -81,6 +48,39 @@ class Result extends React.Component {
             )
         }
     }
+
+    render() {
+        return (
+            <div className="result">
+                { this.getStatistics() }
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Время покупки</th>
+                        <th>Время продажи</th>
+                        <th>Стоимость при покупке</th>
+                        <th>Завершённость</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        this.props.result.deals.map((deal, n) => {
+                            return (
+                                <tr key={n}>
+                                    <td>{ this.getFormattedDate(deal.start) }</td>
+                                    <td>{ this.getFormattedDate(deal.end) }</td>
+                                    <td>{deal.buyPrice}</td>
+                                    <td>{deal.completed ? '+' : '-'}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                    </tbody>
+                    { this.getTableFooter() }
+                </table>
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = state => {
@@ -89,8 +89,8 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => ({
 
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Result)

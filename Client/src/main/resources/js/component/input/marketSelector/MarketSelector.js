@@ -2,16 +2,10 @@ import React from "react"
 import axios from "axios"
 import { connect } from "react-redux"
 import { setMarket } from "Js/store/input/action"
+import { marketSelector } from "Js/store/input/selector"
+import PropTypes from "prop-types"
 import "Css/input.css"
-import {marketSelector} from "../../../store/input/selector";
 
-const statusOffline = {
-    color: "red"
-}
-
-const statusOnline = {
-    color: "green"
-}
 
 class MarketSelector extends React.Component{
     constructor(props) {
@@ -25,18 +19,6 @@ class MarketSelector extends React.Component{
 
     componentDidMount() {
         this.getMarkets()
-    }
-
-    render() {
-        return (
-            <div>
-                <span>Валютная пара</span>
-                <br/>
-                <select value={this.props.market} onChange={this.onMarketChange}>
-                    { this.state.markets.map(market => this.renderMarket(market)) }
-                </select>
-            </div>
-        )
     }
 
     getMarkets() {
@@ -58,6 +40,24 @@ class MarketSelector extends React.Component{
         this.props.setMarket(event.target.value)
     }
 
+    render() {
+        return (
+            <div>
+                <span>Валютная пара</span>
+                <br/>
+                <select value={this.props.market} onChange={this.onMarketChange}>
+                    { this.state.markets.map(market => this.renderMarket(market)) }
+                </select>
+            </div>
+        )
+    }
+
+}
+
+MarketSelector.propTypes = {
+    market: PropTypes.string,
+    markets: PropTypes.array,
+    setMarket: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -66,8 +66,8 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
-    setMarket
-}
+const mapDispatchToProps = dispatch => ({
+    setMarket: market => dispatch(setMarket(market))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(MarketSelector)

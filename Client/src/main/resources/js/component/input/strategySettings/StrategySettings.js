@@ -1,7 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setPercent, setFirstPeriod, setSecondPeriod } from "Js/store/input/action"
-import {firstPeriodSelector, percentSelector, secondPeriodSelector} from "../../../store/input/selector";
+import { firstPeriodSelector, percentSelector, secondPeriodSelector } from "Js/store/input/selector"
+import PropTypes from "prop-types"
 
 class StrategySettings extends React.Component{
     constructor(props) {
@@ -10,6 +11,18 @@ class StrategySettings extends React.Component{
         this.onFirstPeriodChange = this.onFirstPeriodChange.bind(this);
         this.onSecondPeriodChange = this.onSecondPeriodChange.bind(this);
         this.onPercentChange = this.onPercentChange.bind(this);
+    }
+
+    onFirstPeriodChange(event) {
+        this.props.setFirstPeriod(event.target.value)
+    }
+
+    onSecondPeriodChange(event) {
+        this.props.setSecondPeriod(event.target.value)
+    }
+
+    onPercentChange(event) {
+        this.props.setPercent(event.target.value)
     }
 
     render() {
@@ -26,18 +39,15 @@ class StrategySettings extends React.Component{
             </div>
         )
     }
+}
 
-    onFirstPeriodChange(event) {
-        this.props.setFirstPeriod(event.target.value)
-    }
-
-    onSecondPeriodChange(event) {
-        this.props.setSecondPeriod(event.target.value)
-    }
-
-    onPercentChange(event) {
-        this.props.setPercent(event.target.value)
-    }
+StrategySettings.propTypes = {
+    firstPeriod: PropTypes.number,
+    secondPeriod: PropTypes.number,
+    percent: PropTypes.number,
+    setFirstPeriod: PropTypes.func,
+    setSecondPeriod: PropTypes.func,
+    setPercent: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -48,10 +58,10 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
-    setFirstPeriod,
-    setSecondPeriod,
-    setPercent
-}
+const mapDispatchToProps = dispatch => ({
+    setFirstPeriod: firstPeriod => dispatch(setFirstPeriod(firstPeriod)),
+    setSecondPeriod: secondPeriod => dispatch(setSecondPeriod(secondPeriod)),
+    setPercent: percent => dispatch(setPercent(percent))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(StrategySettings)

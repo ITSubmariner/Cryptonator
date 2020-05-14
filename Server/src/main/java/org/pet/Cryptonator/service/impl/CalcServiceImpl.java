@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CalcServiceImlp implements CalcService {
+public class CalcServiceImpl implements CalcService {
     private final BittrexObtainService bittrexObtainService;
 
-    public CalcServiceImlp(BittrexObtainService bittrexObtainService) {
+    public CalcServiceImpl(BittrexObtainService bittrexObtainService) {
         this.bittrexObtainService = bittrexObtainService;
     }
 

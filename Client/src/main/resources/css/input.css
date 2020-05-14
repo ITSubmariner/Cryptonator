@@ -17,3 +17,11 @@ button {
 select, input {
     width: 100%;
 }
+
+.statusOffline {
+    color: red;
+}
+
+.statusOnline {
+    color: green;
+}

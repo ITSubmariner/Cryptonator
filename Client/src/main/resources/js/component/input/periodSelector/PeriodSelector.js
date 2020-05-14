@@ -1,13 +1,18 @@
 import React from "react"
 import { connect } from "react-redux"
 import { setPeriod } from "Js/store/input/action"
-import {periodSelector} from "../../../store/input/selector";
+import { periodSelector } from "Js/store/input/selector"
+import PropTypes from "prop-types"
 
 class PeriodSelector extends React.Component{
     constructor(props) {
         super(props)
 
         this.onPeriodChange = this.onPeriodChange.bind(this);
+    }
+
+    onPeriodChange(event) {
+        this.props.setPeriod(event.target.value)
     }
 
     render() {
@@ -24,10 +29,11 @@ class PeriodSelector extends React.Component{
             </div>
         )
     }
+}
 
-    onPeriodChange(event) {
-        this.props.setPeriod(event.target.value)
-    }
+PeriodSelector.propTypes = {
+    period: PropTypes.string,
+    setPeriod: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -36,8 +42,8 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = {
-    setPeriod
-}
+const mapDispatchToProps = dispatch => ({
+    setPeriod: period => dispatch(setPeriod(period))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(PeriodSelector)
