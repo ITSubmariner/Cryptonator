@@ -32,13 +32,13 @@ class StrategySettings extends React.Component{
         return (
             <div>
                 <span>Период первой скользящей</span><br/>
-                <input type="number" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} />
+                <input type="number" min="0" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} />
                 <br/>
                 <span>Период второй скользящей</span><br/>
-                <input type="number" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} />
+                <input type="number" min="0" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} />
                 <br/>
                 <span>Выигрыш со сделки, %</span><br/>
-                <input type="number" placeholder="Выигрыш со сделки" value={this.props.percent} onChange={this.onPercentChange} />
+                <input type="number" min="0" placeholder="Выигрыш со сделки" value={this.props.percent} onChange={this.onPercentChange} />
             </div>
         )
     }

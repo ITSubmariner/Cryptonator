@@ -8,9 +8,9 @@ import {
 const initialState = {
     market: 0,
     period: "MINUTE_1",
-    firstPeriod: 0,
-    secondPeriod: 0,
-    percent: 0
+    firstPeriod: 5,
+    secondPeriod: 15,
+    percent: 0.5
 }
 
 export const inputReducer = (state = initialState, action) => {
