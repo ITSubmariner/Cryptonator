@@ -1,20 +1,16 @@
 package org.pet.Cryptonator.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 public class MarketDto {
 
     private long id;
     private String name;
     private boolean status;
 
-    public MarketDto(String name, boolean status) {
-        this.name = name;
-        this.status = status;
-    }
 }

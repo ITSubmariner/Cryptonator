@@ -11,6 +11,7 @@ import org.pet.Cryptonator.exception.GetTicketsException;
 import org.pet.Cryptonator.repository.MarketRepository;
 import org.pet.Cryptonator.repository.TicketRepository;
 import org.pet.Cryptonator.service.BittrexObtainService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,7 +24,12 @@ import java.util.List;
 
 @Service
 public class BittrexObtainServiceImpl implements BittrexObtainService {
-    private final String marketUrl = "https://api.bittrex.com/v3/markets";
+
+    @Value("${bittrex.marketURL}")
+    private String marketUrl;
+    @Value("${bittrex.ticketUnformattedURL}")
+    private String ticketUnformattedURL;
+
     private final MarketRepository marketRepository;
     private final TicketRepository ticketRepository;
 
@@ -46,10 +52,9 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
             //deserialize bittrex json to Market list
             List<MarketEntity> markets = new ArrayList<>();
             for (JsonNode node : response.getBody()) {
-                MarketEntity market = new MarketEntity(
-                        node.get("symbol").asText(),
-                        node.get("status").asText().equals("ONLINE")
-                );
+                MarketEntity market = new MarketEntity()
+                        .setName(node.get("symbol").asText())
+                        .setStatus(node.get("status").asText().equals("ONLINE"));
                 markets.add(market);
             }
             //write market list to ignite
@@ -73,7 +78,7 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
 
     private List<TicketDto> getTicketsFromApi(long marketId, Period period) {
         MarketDto marketDto = marketRepository.get(marketId);
-        String ticketUrl = "https://api.bittrex.com/v3/markets/" + marketDto.getName() + "/candles/" + period.name() + "/recent";
+        String ticketUrl = String.format(ticketUnformattedURL, marketDto.getName(), period.name());
         //get tickets from bittrex api as JsonNodes
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<JsonNode[]> response = restTemplate.getForEntity(ticketUrl, JsonNode[].class);
@@ -82,14 +87,13 @@ public class BittrexObtainServiceImpl implements BittrexObtainService {
             //deserialize bittrex json to Ticket list
             List<TicketEntity> tickets = new ArrayList<>();
             for (JsonNode node : response.getBody()) {
-                TicketEntity ticket = new TicketEntity(
-                        marketId,
-                        period,
-                        LocalDateTime.parse(node.get("startsAt").asText(), DateTimeFormatter.ISO_DATE_TIME),
-                        node.get("open").asDouble(),
-                        node.get("close").asDouble(),
-                        node.get("volume").asDouble()
-                );
+                TicketEntity ticket = new TicketEntity()
+                        .setMarket(marketId)
+                        .setPeriod(period)
+                        .setStartsAt(LocalDateTime.parse(node.get("startsAt").asText(), DateTimeFormatter.ISO_DATE_TIME))
+                        .setOpen(node.get("open").asDouble())
+                        .setClose(node.get("close").asDouble())
+                        .setVolume(node.get("volume").asDouble());
                 tickets.add(ticket);
             }
             return this.ticketRepository.saveAll(tickets);

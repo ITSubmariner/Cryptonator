@@ -8,11 +8,16 @@ import org.springframework.stereotype.Component;
 public class MarketConverter {
 
     public MarketDto entityToDto(long id, MarketEntity entity) {
-        return new MarketDto(id, entity.getName(), entity.isStatus());
+        return new MarketDto()
+                .setId(id)
+                .setName(entity.getName())
+                .setStatus(entity.isStatus());
     }
 
     public MarketEntity dtoToEntity(MarketDto dto) {
-        return new MarketEntity(dto.getName(), dto.isStatus());
+        return new MarketEntity()
+                .setName(dto.getName())
+                .setStatus(dto.isStatus());
     }
 
 }

@@ -1,15 +1,15 @@
 package org.pet.Cryptonator.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.pet.Cryptonator.domain.Period;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 public class TicketDto {
 
     private long id;
@@ -19,14 +19,5 @@ public class TicketDto {
     private double open;
     private double close;
     private double volume;
-
-    public TicketDto(long market, Period period, LocalDateTime startsAt, double open, double close, double volume) {
-        this.market = market;
-        this.period = period;
-        this.startsAt = startsAt;
-        this.open = open;
-        this.close = close;
-        this.volume = volume;
-    }
 
 }

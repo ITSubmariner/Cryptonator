@@ -10,6 +10,7 @@ import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder;
 import org.pet.Cryptonator.domain.entity.MarketEntity;
 import org.pet.Cryptonator.domain.entity.TicketEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,8 @@ import java.util.List;
 
 @Configuration
 public class IgniteConfig {
+    @Value("${ignite.discovery}")
+    private String igniteDiscoveryIpList;
 
     @Bean
     public Ignite igniteInstance(IgniteConfiguration configuration) {
@@ -48,7 +51,7 @@ public class IgniteConfig {
     @Bean
     public DiscoverySpi igniteDiscovery() {
         TcpDiscoveryMulticastIpFinder finder = new TcpDiscoveryMulticastIpFinder();
-        finder.setAddresses(Collections.singletonList("127.0.0.1:47500..47509"));
+        finder.setAddresses(Collections.singletonList(igniteDiscoveryIpList));
         return new TcpDiscoverySpi().setIpFinder(finder);
     }
 

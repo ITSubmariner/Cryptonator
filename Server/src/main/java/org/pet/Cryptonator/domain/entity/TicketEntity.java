@@ -1,15 +1,15 @@
 package org.pet.Cryptonator.domain.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.pet.Cryptonator.domain.Period;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Accessors(chain = true)
 public class TicketEntity {
 
     private long market;

@@ -48,7 +48,7 @@ public class TicketRepository {
         while (iterator.hasNext()) {
             Cache.Entry<Long, TicketEntity> entry = iterator.next();
             TicketEntity entity = entry.getValue();
-            if (entity.getMarket() == marketId && entity.getPeriod().compareTo(period) == 0) {
+            if (entity.getMarket() == marketId && entity.getPeriod() == period) {
                 TicketDto ticketDto = ticketConverter.entityToDto(entry.getKey(), entry.getValue());
                 result.add(ticketDto);
             }
@@ -65,9 +65,7 @@ public class TicketRepository {
 
     public List<TicketDto> saveAll(List<TicketEntity> entities) {
         List<TicketDto> result = new ArrayList<>();
-        for (TicketEntity entity : entities) {
-            result.add(save(entity));
-        }
+        entities.forEach(entity -> result.add(save(entity)));
         result.sort(Comparator.comparing(TicketDto::getStartsAt));
         return result;
     }

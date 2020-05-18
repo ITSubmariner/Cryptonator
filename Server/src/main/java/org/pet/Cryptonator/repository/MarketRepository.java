@@ -55,9 +55,7 @@ public class MarketRepository {
 
     public List<MarketDto> saveAll(List<MarketEntity> markets) {
         List<MarketDto> result = new ArrayList<>();
-        for (MarketEntity market : markets) {
-            result.add(save(market));
-        }
+        markets.forEach(market -> result.add(save(market)));
         return result;
     }
 
