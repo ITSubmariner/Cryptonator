@@ -1,7 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
 import { resultSelector } from "Js/store/selector";
-import "Css/result.css"
+import { Grid, Box, TableContainer, Table, TableHead, TableFooter, TableRow, TableCell, TableBody, Paper, Typography } from "@material-ui/core"
+import { CheckCircleOutlined, HighlightOffOutlined, Remove } from "@material-ui/icons"
+import { green } from "@material-ui/core/colors"
 
 class Result extends React.Component {
     constructor(props) {
@@ -11,74 +13,86 @@ class Result extends React.Component {
         this.getStatistics = this.getStatistics.bind(this);
     }
 
+    getTableRows() {
+        return this.props.result.deals.map((deal, n) => {
+            return (
+                <TableRow key={n}>
+                    <TableCell align="center">{this.getFormattedDate(deal.start)}</TableCell>
+                    <TableCell align="center">{this.getFormattedDate(deal.end)}</TableCell>
+                    <TableCell align="center">{deal.buyPrice}</TableCell>
+                    <TableCell align="center">{deal.completed ? (<CheckCircleOutlined style={{ color: green[500] }} />) : (<HighlightOffOutlined color="error" />)}</TableCell>
+                </TableRow>
+            )
+        })
+    }
+
     getTableFooter() {
         if (this.props.result.deals.length === 0) {
             return (
-                <tfoot>
-                <tr>
-                    <td colSpan="100%">Нет данных</td>
-                </tr>
-                </tfoot>
+                <TableFooter>
+                    <TableRow>
+                        <TableCell align="center" colspan="100%">
+                            Нет данных
+                        </TableCell>
+                    </TableRow>
+                </TableFooter>
             )
         }
     }
 
     getFormattedDate(date) {
         if (date == null) {
-            return (<span>—</span>)
+            return (<Remove />)
         }
         let pDate = new Date(date);
         return (
-            <span>
-                <span className="time">{ pDate.toLocaleTimeString().substring(0, 5) }</span><span className="date">{ pDate.toLocaleDateString() }</span>
-            </span>
+            <Box display="inline">
+                <Box fontStyle="italic" display="inline">
+                    { pDate.toLocaleTimeString().substring(0, 5) }
+                </Box>
+                <Box ml={0.5} fontSize={12} display="inline" color="text.secondary">
+                    { pDate.toLocaleDateString() }
+                </Box>
+            </Box>
         )
     }
 
     getStatistics() {
         if (this.props.result.deals.length) {
             return (
-                <div className="statistics">
-                    <span>Общее количество сделок: { this.props.result.deals.length }</span>
-                    <br/>
-                    <span>Теоретическая прибыль: { this.props.result.gain }%</span>
-                    <br/>
-                    <span>Период проведения расчетов: { this.getFormattedDate(this.props.result.startDate) } - { this.getFormattedDate(this.props.result.endDate) }</span>
-                </div>
+                <Box mb={1} ml={1}>
+                    <Box>Общее количество сделок: { this.props.result.deals.length }</Box>
+                    <Box>Теоретическая прибыль: { this.props.result.gain }%</Box>
+                    <Box>Период проведения расчетов: { this.getFormattedDate(this.props.result.startDate) } - { this.getFormattedDate(this.props.result.endDate) }</Box>
+                </Box>
             )
         }
     }
 
     render() {
         return (
-            <div className="result">
-                { this.getStatistics() }
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Время покупки</th>
-                        <th>Время продажи</th>
-                        <th>Стоимость при покупке</th>
-                        <th>Завершённость</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.props.result.deals.map((deal, n) => {
-                            return (
-                                <tr key={n}>
-                                    <td>{ this.getFormattedDate(deal.start) }</td>
-                                    <td>{ this.getFormattedDate(deal.end) }</td>
-                                    <td>{deal.buyPrice}</td>
-                                    <td>{deal.completed ? '+' : '-'}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                    </tbody>
-                    { this.getTableFooter() }
-                </table>
-            </div>
+            <Grid>
+                <Box mt={2} ml={2}>
+                    { this.getStatistics() }
+                    <TableContainer component={Paper}>
+                        <Table size="small">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Время покупки</TableCell>
+                                    <TableCell>Время продажи</TableCell>
+                                    <TableCell>Стоимость при покупке</TableCell>
+                                    <TableCell>Завершённость</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.getTableRows()}
+                            </TableBody>
+                            {this.getTableFooter()}
+                        </Table>
+
+                    </TableContainer>
+                </Box>
+            </Grid>
         )
     }
 }

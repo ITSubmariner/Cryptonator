@@ -2,9 +2,11 @@ import React from "react"
 import { connect } from "react-redux"
 import { setPercent, setFirstPeriod, setSecondPeriod } from "Js/store/input/action"
 import { firstPeriodSelector, percentSelector, secondPeriodSelector } from "Js/store/input/selector"
+import { TextField, Grid, Box } from "@material-ui/core"
 import PropTypes from "prop-types"
 
-class StrategySettings extends React.Component{
+
+class StrategySettings extends React.Component {
     constructor(props) {
         super(props)
 
@@ -13,33 +15,34 @@ class StrategySettings extends React.Component{
         this.onPercentChange = this.onPercentChange.bind(this);
     }
 
-    onFirstPeriodChange(event) {
+    handleFirstPeriodChange(event) {
         let firstPeriod = Number(event.target.value)
         this.props.setFirstPeriod(firstPeriod)
     }
 
-    onSecondPeriodChange(event) {
+    handleSecondPeriodChange(event) {
         let secondPeriod = Number(event.target.value)
         this.props.setSecondPeriod(secondPeriod)
     }
 
-    onPercentChange(event) {
+    handlePercentChange(event) {
         let percent = Number(event.target.value)
         this.props.setPercent(percent)
     }
 
     render() {
         return (
-            <div>
-                <span>Период первой скользящей</span><br/>
-                <input type="number" min="0" value={this.props.firstPeriod} onChange={this.onFirstPeriodChange} />
-                <br/>
-                <span>Период второй скользящей</span><br/>
-                <input type="number" min="0" value={this.props.secondPeriod} onChange={this.onSecondPeriodChange} />
-                <br/>
-                <span>Выигрыш со сделки, %</span><br/>
-                <input type="number" min="0" placeholder="Выигрыш со сделки" value={this.props.percent} onChange={this.onPercentChange} />
-            </div>
+            <Grid container direction="column">
+                <Box mt={1}>
+                    <TextField required inputProps={{min: 0}} margin="dense" fullWidth variant="outlined" type="number" value={this.props.firstPeriod} onChange={this.handleFirstPeriodChange} label="Период первой скользящей" />
+                </Box>
+                <Box>
+                    <TextField required inputProps={{min: 0}} margin="dense" fullWidth variant="outlined" type="number" value={this.props.secondPeriod} onChange={this.handleSecondPeriodChange} label="Период второй скользящей" />
+                </Box>
+                <Box>
+                    <TextField required inputProps={{min: 0}} margin="dense" fullWidth variant="outlined" type="number" value={this.props.percent} onChange={this.handlePercentChange} label="Выигрыш со сделки, %" />
+                </Box>
+            </Grid>
         )
     }
 }
