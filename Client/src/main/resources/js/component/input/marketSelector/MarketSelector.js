@@ -14,7 +14,7 @@ class MarketSelector extends React.Component {
             markets: []
         }
 
-        this.onMarketChange = this.onMarketChange.bind(this);
+        this.handleMarketChange = this.handleMarketChange.bind(this);
     }
 
     componentDidMount() {

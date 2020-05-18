@@ -9,7 +9,7 @@ class PeriodSelector extends React.Component{
     constructor(props) {
         super(props)
 
-        this.onPeriodChange = this.onPeriodChange.bind(this);
+        this.handlePeriodChange = this.handlePeriodChange.bind(this);
     }
 
     handlePeriodChange(event) {

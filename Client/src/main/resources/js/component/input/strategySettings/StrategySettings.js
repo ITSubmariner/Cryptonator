@@ -10,9 +10,9 @@ class StrategySettings extends React.Component {
     constructor(props) {
         super(props)
 
-        this.onFirstPeriodChange = this.onFirstPeriodChange.bind(this);
-        this.onSecondPeriodChange = this.onSecondPeriodChange.bind(this);
-        this.onPercentChange = this.onPercentChange.bind(this);
+        this.handleFirstPeriodChange = this.handleFirstPeriodChange.bind(this);
+        this.handleSecondPeriodChange = this.handleSecondPeriodChange.bind(this);
+        this.handlePercentChange = this.handlePercentChange.bind(this);
     }
 
     handleFirstPeriodChange(event) {

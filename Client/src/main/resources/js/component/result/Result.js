@@ -11,6 +11,7 @@ class Result extends React.Component {
 
         this.getTableFooter = this.getTableFooter.bind(this);
         this.getStatistics = this.getStatistics.bind(this);
+        this.getTableRows = this.getTableRows.bind(this);
     }
 
     getTableRows() {
@@ -31,7 +32,7 @@ class Result extends React.Component {
             return (
                 <TableFooter>
                     <TableRow>
-                        <TableCell align="center" colspan="100%">
+                        <TableCell align="center" colSpan="100%">
                             Нет данных
                         </TableCell>
                     </TableRow>
