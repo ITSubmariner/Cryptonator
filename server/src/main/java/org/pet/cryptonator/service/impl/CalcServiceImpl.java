@@ -1,9 +1,10 @@
 package org.pet.cryptonator.service.impl;
 
-import org.pet.cryptonator.domain.Period;
-import org.pet.cryptonator.domain.Result;
-import org.pet.cryptonator.domain.dto.TicketDto;
-import org.pet.cryptonator.service.BittrexObtainService;
+import com.github.ccob.bittrex4j.BittrexExchange;
+import lombok.RequiredArgsConstructor;
+import org.pet.cryptonator.entity.enums.Period;
+import org.pet.cryptonator.dto.Result;
+import org.pet.cryptonator.dto.TicketDto;
 import org.pet.cryptonator.service.CalcService;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CalcServiceImpl implements CalcService {
-    private final BittrexObtainService bittrexObtainService;
 
-    public CalcServiceImpl(BittrexObtainService bittrexObtainService) {
-        this.bittrexObtainService = bittrexObtainService;
-    }
+    private final BittrexExchange bittrexExchange;
 
     @Override
     public Result calculate(long marketId, Period period, int smallPeriod, int bigPeriod, double percent) {

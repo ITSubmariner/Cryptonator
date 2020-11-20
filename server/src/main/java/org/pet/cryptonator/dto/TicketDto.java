@@ -1,17 +1,18 @@
-package org.pet.cryptonator.domain.entity;
+package org.pet.cryptonator.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.pet.cryptonator.domain.Period;
+import org.pet.cryptonator.entity.enums.Period;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class TicketEntity {
+public class TicketDto {
 
+    private long id;
     private long market;
     private Period period;
     private LocalDateTime startsAt;

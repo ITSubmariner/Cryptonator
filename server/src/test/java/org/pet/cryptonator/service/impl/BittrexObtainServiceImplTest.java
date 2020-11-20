@@ -2,12 +2,11 @@ package org.pet.cryptonator.service.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.pet.cryptonator.domain.Period;
-import org.pet.cryptonator.domain.dto.MarketDto;
-import org.pet.cryptonator.domain.dto.TicketDto;
+import org.pet.cryptonator.entity.enums.Period;
+import org.pet.cryptonator.dto.MarketDto;
+import org.pet.cryptonator.dto.TicketDto;
 import org.pet.cryptonator.repository.MarketRepository;
 import org.pet.cryptonator.repository.TicketRepository;
-import org.pet.cryptonator.service.BittrexObtainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;

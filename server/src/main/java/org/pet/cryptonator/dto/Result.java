@@ -1,4 +1,4 @@
-package org.pet.cryptonator.domain;
+package org.pet.cryptonator.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package org.pet.cryptonator.controller;
 
-import org.pet.cryptonator.domain.Period;
-import org.pet.cryptonator.domain.Result;
+import org.pet.cryptonator.entity.enums.Period;
+import org.pet.cryptonator.dto.Result;
 import org.pet.cryptonator.service.CalcService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
