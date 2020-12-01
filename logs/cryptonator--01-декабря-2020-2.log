@@ -1,0 +1,22 @@
+2020-12-01 22:15:00,116 INFO o.s.b.StartupInfoLogger [main] Starting CryptonatorApplication on DESKTOP-K6OCAC1 with PID 10544 (started by Антон in C:\Users\Антон\IdeaProjects\cryptonator)
+2020-12-01 22:15:00,131 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-12-01 22:15:00,821 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-12-01 22:15:00,916 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 82ms. Found 2 JPA repository interfaces.
+2020-12-01 22:15:01,553 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-12-01 22:15:01,565 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-12-01 22:15:01,566 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-12-01 22:15:01,567 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-12-01 22:15:01,727 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-12-01 22:15:01,727 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1549 ms
+2020-12-01 22:15:01,865 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2020-12-01 22:15:02,035 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2020-12-01 22:15:02,094 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-01 22:15:02,190 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 5.4.12.Final
+2020-12-01 22:15:02,367 INFO o.h.a.c.r.j.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-12-01 22:15:02,515 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2020-12-01 22:15:03,361 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-01 22:15:03,378 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-12-01 22:15:05,356 INFO o.p.c.s.ChooseMarketService [main] Good market count: 127
+2020-12-01 22:15:05,721 INFO o.p.c.s.ChooseMarketService [main] Changing best market to ETHBTC
+2020-12-01 22:15:06,339 INFO o.p.c.s.ChooseMarketService [main] Changing best market to BNBBTC
+2020-12-01 22:15:06,945 INFO o.p.c.s.ChooseMarketService [main] Changing best market to GASBTC
